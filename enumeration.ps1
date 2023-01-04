@@ -5,6 +5,14 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
   exit
 }
 
+# Get current logged in user
+$currentUser = Get-WmiObject -Class Win32_ComputerSystem | Select-Object -ExpandProperty UserName
+Write-Output "Logged in user: $currentUser"
+
+# Get hostname
+$hostname = hostname
+Write-Output "Hostname: $hostname"
+
 # Get system information
 $systemInfo = Get-CimInstance -ClassName Win32_OperatingSystem
 
@@ -33,13 +41,19 @@ $services = Get-Service | Where-Object {$_.Status -eq "Running"}
 Write-Output "Running Services:"
 $services | Select-Object -Property Name, DisplayName | Format-Table -AutoSize
 
-# Extract local NTLM hashes
-$output = net.exe user | samdump2.exe -s SAM
-
-# Display local NTLM hashes
-Write-Output "Local NTLM Hashes:"
-$output | ForEach-Object {
-  if ($_ -match "^([^:]+):([^:]+):([^:]+):") {
-    Write-Output "$($matches[1]): $($matches[3])"
-  }
+# Enumerate users
+$users = Get-LocalUser
+foreach ($user in $users)
+{
+    Write-Output "Username: $($user.Name)"
+    Write-Output "Description: $($user.Description)"
+    Write-Output "Enabled: $($user.Enabled)"
+    Write-Output "Account expires: $($user.AccountExpires)"
+    Write-Output "Password never expires: $($user.PasswordNeverExpires)"
+    Write-Output "-----------------------------"
 }
+
+# Run ipconfig /all
+ipconfig /all
+
+
