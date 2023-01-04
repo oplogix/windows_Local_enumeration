@@ -4,6 +4,19 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
   Write-Output "Error: You must run this script with administrator privileges."
   exit
 }
+echo "^
+  /$$$$$$            /$$                           /$$          ^
+ /$$__  $$          | $$                          |__/          ^
+| $$  \ $$  /$$$$$$ | $$        /$$$$$$   /$$$$$$  /$$ /$$   /$$^
+| $$  | $$ /$$__  $$| $$       /$$__  $$ /$$__  $$| $$|  $$ /$$/^
+| $$  | $$| $$  \ $$| $$      | $$  \ $$| $$  \ $$| $$ \  $$$$/ ^
+| $$  | $$| $$  | $$| $$      | $$  | $$| $$  | $$| $$  >$$  $$ ^
+|  $$$$$$/| $$$$$$$/| $$$$$$$$|  $$$$$$/|  $$$$$$$| $$ /$$/\  $$^
+ \______/ | $$____/ |________/ \______/  \____  $$|__/|__/  \__/^
+          | $$                           /$$  \ $$              ^
+          | $$                          |  $$$$$$/              ^
+          |__/                           \______/               ^
+"
 
 # Get current logged in user
 $currentUser = Get-WmiObject -Class Win32_ComputerSystem | Select-Object -ExpandProperty UserName
