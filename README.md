@@ -10,4 +10,4 @@ to allow powershell to run scripts.
 
 
 Download or copy powershell script and run with 
-```./windows_basic_enumeration_local.txt```
+```./enumeration.ps1```
