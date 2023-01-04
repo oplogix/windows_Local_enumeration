@@ -1,5 +1,5 @@
 # Windows Local Enumeration Tool
-This is a quick tool to get systeminfo, installed software, running services, users and dump NTLM hashes on computer. 
+This is a quick tool to get logged in user and All Users, hostname, systeminfo, installed software, running services, and runs ipconfig all.
 
 
 
